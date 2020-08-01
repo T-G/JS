@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input field manipulation</title>
+    <style>
+        .input-error {
+            color: red;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelector('form').onsubmit = function(){
+                const uname = document.querySelector('#uname').value.length;
+                const pword = document.querySelector('#password').value.length;
+                const lbl_uname = document.querySelector("#uname-error");
+                const lbl_pword = document.querySelector("#pword-error");
+                //console.log(uname);
+                //console.log(pword);
+                 if( uname == 0 ){
+                    lbl_uname.innerHTML = "Please enter Username";
+                    return false;
+                } 
+                if( pword == 0){
+                    lbl_pword.innerHTML = "Please enter a Password";
+                    return false;
+                } 
+                alert(`Username: ${uname} and Password: ${pword}`);
+            }
+
+        });
+    </script>
+</head>
+<body>
+    <h1>Form entry</h1>
+
+    <form>
+        <input type="text" autofocus id="uname" placeholder="Name">
+        <div class="input-error" id="uname-error"></div>
+        <input type="password" id="password" placeholder="password">
+        <div class="input-error" id="pword-error"></div>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>

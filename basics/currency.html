@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Exchange</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const currency = document.querySelector('#currency');
+            const submit = document.querySelector('#submit');
+            
+            // disable the submit button
+            submit.disabled = true;
+            currency.onkeyup = function(){
+                if(currency.value.length > 0) {
+                    submit.disabled = false;
+                } else {
+                    submit.disabled = true;
+                }
+            }
+            
+
+            document.querySelector('form').onsubmit = function(){
+                
+                const total_input_amt = currency.value;
+
+                url = "https://api.exchangeratesapi.io/latest?base=USD";
+                fetch(url)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                const rate =  data.rates.EUR
+                const final_amount = total_input_amt * rate;
+                document.querySelector('#result').innerHTML = `<h1> Exchange rate: 1 USD = ${rate.toFixed(3)} EUR <br> Total for ${currency.value} USD = ${final_amount.toFixed(3)} EUR`;
+                //document.querySelector('body').innerHTML = `<h1>1 USD  =  ${rate.toFixed(3)} EUR </h1>`;
+                })
+                .catch((error) => {
+                    console.log("Error:", error);
+                });
+                currency.value = '';
+                submit.disabled = true;
+                
+                // stop the form from being posted
+                return false;
+                
+
+                
+            }
+            
+        });
+    </script>
+</head>
+<body>
+    <h1>Currency Converter</h1>
+    <form>
+        <input type="text" id="currency" placeholder="Enter Amount">
+        <input type="submit" id="submit">
+    </form>
+    <div id="result"></div>
+</body>
+</html>
