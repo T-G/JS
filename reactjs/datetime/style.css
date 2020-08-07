@@ -1,0 +1,14 @@
+#divJs, #divReact{
+    width: 500px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+#divReact{
+    background-color: rgb(204, 191, 189);
+}
+
+.split{
+    align-content: center;
+    border: 1px solid rebeccapurple;
+    padding: 10px;
+}
